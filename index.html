@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amy 吃什麼v18</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #69b578, #4e996c);
+    }
+
+    .wrapper {
+      width: 90%;
+      max-width: 34.37em;
+      max-height: 90vh;
+      background-color: #ffffff;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      padding: 3em;
+      border-radius: 1em;
+      box-shadow: 0 4em 5em rgba(27, 8, 53, 0.2);
+    }
+
+    .main>h1 {
+      text-align: center;
+      font-size: 40px;
+      text-shadow: 2px 2px rgb(200, 200, 200);
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    #wheel {
+      max-height: inherit;
+      width: inherit;
+      top: 0;
+      padding: 0;
+    }
+
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    #spin-btn {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      height: 26%;
+      width: 26%;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 0;
+      background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+      color: #372685;
+      text-transform: uppercase;
+      font-size: 1.8em;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    img {
+      position: absolute;
+      width: 4em;
+      top: 45%;
+      right: -8%;
+    }
+
+    #final-value {
+      font-size: 1.5em;
+      text-align: center;
+      margin-top: 1.5em;
+      color: #202020;
+      font-weight: 500;
+    }
+
+    @media screen and (max-width: 768px) {
+      .wrapper {
+        font-size: 12px;
+      }
+
+      img {
+        right: -5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <div class="main">
+      <h1>Amy 吃什麼 v18</h1>
+      <div class="container">
+        <canvas id="wheel"></canvas>
+        <button id="spin-btn">Spin</button>
+        <img src="https://cdn-icons-png.flaticon.com/128/9590/9590006.png" alt="spinner-arrow" />
+      </div>
+      <div id="final-value">
+        <p>Click the Spin Button to Start!</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Chart JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <!-- Chart JS Plugin for displaying text over chart -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
+  <!-- Script JS -->
+  <script>
+    const wheel = document.getElementById("wheel");
+    const spinBtn = document.getElementById("spin-btn");
+    const finalValue = document.getElementById("final-value");
+
+    const generateColors = (count) => {
+      const colors = [];
+      for (let i = 0; i < count; i++) {
+        colors.push(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
+      }
+      return colors;
+    };
+
+    let pieColors = generateColors(19);
+
+    const rotationValues = [
+      { minDegree: 0, maxDegree: 20, value: 4 },
+      { minDegree: 21, maxDegree: 40, value: 3 },
+      { minDegree: 41, maxDegree: 60, value: 2 },
+      { minDegree: 61, maxDegree: 80, value: 1 },
+      { minDegree: 81, maxDegree: 100, value: 18 },
+      { minDegree: 101, maxDegree: 120, value: 17 },
+      { minDegree: 121, maxDegree: 140, value: 16 },
+      { minDegree: 141, maxDegree: 160, value: 15 },
+      { minDegree: 161, maxDegree: 180, value: 14 },
+      { minDegree: 181, maxDegree: 200, value: 13 },
+      { minDegree: 201, maxDegree: 220, value: 12 },
+      { minDegree: 221, maxDegree: 240, value: 11 },
+      { minDegree: 241, maxDegree: 260, value: 10 },
+      { minDegree: 261, maxDegree: 280, value: 9 },
+      { minDegree: 281, maxDegree: 300, value: 8 },
+      { minDegree: 301, maxDegree: 320, value: 7 },
+      { minDegree: 321, maxDegree: 340, value: 6 },
+      { minDegree: 341, maxDegree: 360, value: 5 },
+    ];
+
+    let myChart = new Chart(wheel, {
+      plugins: [ChartDataLabels],
+      type: "pie",
+      data: {
+        labels: ["八方1", "帕米2", "角屋3", "賽百味4", "幸福5", "漢堡6", "溫洲7", "碧螺春8", "壽司郎9", "韓食10", "燒肉11", "轉角冰12", "景美夜市13", "石二鍋14", "山東15", "披薩16", "咖喱飯17", "古味18"],
+        datasets: [{
+          backgroundColor: pieColors,
+          data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        }],
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 0 },
+        plugins: {
+          tooltip: false,
+          legend: { display: false },
+          datalabels: {
+            color: "#ffffff",
+            formatter: (_, context) => context.chart.data.labels[context.dataIndex],
+            font: { size: 24 },
+          },
+        },
+      },
+    });
+
+    const valueGenerator = (angleValue) => {
+      for (let i of rotationValues) {
+        if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
+          if (i.value >= 18)
+            offset = 1
+          else
+            offset = i.value + 1
+          finalValue.innerHTML = `<p>Winner: Section ${offset}</p>`;
+          spinBtn.disabled = false;
+          break;
+        }
+      }
+    };
+
+    let count = 0;
+    let resultValue = 101;
+
+    spinBtn.addEventListener("click", () => {
+      spinBtn.disabled = true;
+      finalValue.innerHTML = `<p>Spinning the wheel. Good luck!</p>`;
+      let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
+      let rotationInterval = window.setInterval(() => {
+        myChart.options.rotation = myChart.options.rotation + resultValue;
+        myChart.update();
+        if (myChart.options.rotation >= 360) {
+          count += 1;
+          resultValue -= 5;
+          myChart.options.rotation = 0;
+        } else if (count > 18 && myChart.options.rotation == randomDegree) {
+          valueGenerator(randomDegree);
+          clearInterval(rotationInterval);
+          count = 0;
+          resultValue = 101;
+        }
+      }, 10);
+    });  
+  </script>
+</body>
+
+</html>
