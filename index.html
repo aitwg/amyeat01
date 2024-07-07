@@ -183,7 +183,7 @@
           datalabels: {
             color: "#ffffff",
             formatter: (_, context) => context.chart.data.labels[context.dataIndex],
-            font: { size: 24 },
+            font: { size: 16 },
           },
         },
       },
@@ -196,7 +196,7 @@
             offset = 1
           else
             offset = i.value + 1
-          finalValue.innerHTML = `<p>Winner: Section ${offset}</p>`;
+          finalValue.innerHTML = `<p>Winner: Selected</p>`;
           spinBtn.disabled = false;
           break;
         }
